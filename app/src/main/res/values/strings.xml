@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Chat_2022_eleves</string>
+    <string name="appname">Clavardons !</string>
+    <string name="login">Login :</string>
+    <string name="passe">Mot de passe :</string>
+    <string name="remember">Se souvenir de moi :</string>
+    <string name="choix_conversation">Choix Conversation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">TestActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
