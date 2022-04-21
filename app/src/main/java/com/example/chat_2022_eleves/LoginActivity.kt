@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
 
         // Si le réseau est disponible, alors on réactive le bouton OK
-        btnLogin?.isEnabled = gs!!.verifReseau()
+        btnLogin?.isEnabled = gs!!.verifReseau(this)
 
         // relire les préférences de l'application
         // mettre à jour le formulaire

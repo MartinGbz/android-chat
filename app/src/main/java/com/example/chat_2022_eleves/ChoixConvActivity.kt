@@ -22,8 +22,9 @@ class ChoixConvActivity : AppCompatActivity() {
         private val layoutId: Int,
         private val dataConvs: ArrayList<Conversation?>?
     ) : ArrayAdapter<Conversation?>(context!!, layoutId, dataConvs!!) {
-        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-            //return getCustomView(position, convertView, parent);
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
+            // return getCustomView(position, convertView, parent);
             // getLayoutInflater() vient de Android.Activity => il faut utiliser une classe interne
             val inflater = layoutInflater
             val item = inflater.inflate(layoutId, parent, false)
@@ -31,24 +32,26 @@ class ChoixConvActivity : AppCompatActivity() {
             val label = item.findViewById<View?>(R.id.spinner_theme) as TextView
             label.text = nextC?.getTheme() ?: ""
             val icon = item.findViewById<View?>(R.id.spinner_icon) as ImageView
-            if (nextC?.getActive() == true) icon.setImageResource(R.drawable.icon36) else icon.setImageResource(
-                R.drawable.icongray36
-            )
+            if (nextC?.getActive() == true) {
+                icon.setImageResource(R.drawable.icon36)
+            }
+            else {
+                icon.setImageResource(R.drawable.icongray36)
+            }
             return item
         }
 
         @SuppressLint("ViewHolder")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            //return getCustomView(position, convertView, parent);
+            // return getCustomView(position, convertView, parent);
             val inflater = layoutInflater
             val item = inflater.inflate(layoutId, parent, false)
             val nextC = dataConvs?.get(position)
             val label = item.findViewById<View?>(R.id.spinner_theme) as TextView
             label.text = nextC?.getTheme() ?: ""
             val icon = item.findViewById<View?>(R.id.spinner_icon) as ImageView
-            if (nextC?.getActive() == true) icon.setImageResource(R.drawable.icon) else icon.setImageResource(
-                R.drawable.icongray
-            )
+            if (nextC?.getActive() == true) icon.setImageResource(R.drawable.icon)
+            else icon.setImageResource(R.drawable.icongray)
             return item
         }
     }
@@ -68,20 +71,12 @@ class ChoixConvActivity : AppCompatActivity() {
                 response: Response<ListConversations?>?
             ) {
                 val listeConvs = response?.body()
-                Log.i(GlobalState.Companion.CAT, listeConvs.toString())
+                Log.i(GlobalState.CAT, listeConvs.toString())
                 spinConversations = findViewById<View?>(R.id.spinConversations) as Spinner
-                //ArrayAdapter<Conversation> dataAdapter = new ArrayAdapter<Conversation>(
-                //        ChoixConversationActivity.this,
-                //        android.R.layout.simple_spinner_item,
-                //        listeConvs.getConversations());
-                //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //spinConversations.setAdapter(dataAdapter);
-                spinConversations!!.setAdapter(
-                    MyCustomAdapter(
-                        this@ChoixConvActivity,
-                        R.layout.spinner_item,
-                        listeConvs?.getConversations()
-                    )
+                spinConversations!!.adapter = MyCustomAdapter(
+                    this@ChoixConvActivity,
+                    R.layout.spinner_item,
+                    listeConvs?.getConversations()
                 )
             }
 

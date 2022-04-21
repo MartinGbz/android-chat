@@ -6,5 +6,5 @@ import retrofit2.http.Header
 
 interface APIInterface {
     @GET("conversations")
-    open fun doGetListConversation(@Header("hash") hash: String?): Call<ListConversations?>?
+    fun doGetListConversation(@Header("hash") hash: String?): Call<ListConversations?>?
 }
