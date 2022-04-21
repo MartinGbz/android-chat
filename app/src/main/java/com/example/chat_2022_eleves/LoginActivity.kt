@@ -164,47 +164,40 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-//    btnLogin.setOnClickListener(object : View.OnClickListener {
-        //        override fun onClick(view: View?) {
-        //            // Do some work here
-        //        }
-        override fun onClick(view: View?) {
-            val editor = sp?.edit()
-            if (view != null) {
-                when (view.getId()) {
-                    R.id.btnLogin -> {
-                        // TODO : il faudrait sauvegarder les identifiants dans les préférences
-                        gs?.alerter("click OK")
-                        //gs.requeteGET("http://tomnab.fr/fixture/","");
-                        //JSONAsyncTask reqGET = new JSONAsyncTask();
-                        //reqGET.execute("http://tomnab.fr/fixture/","cle=valeur");
+    override fun onClick(view: View?) {
+        val editor = sp?.edit()
+        if (view != null) {
+            when (view.getId()) {
+                R.id.btnLogin -> {
+                    // TODO : il faudrait sauvegarder les identifiants dans les préférences
+                    gs?.alerter("click OK")
+                    //gs.requeteGET("http://tomnab.fr/fixture/","");
+                    //JSONAsyncTask reqGET = new JSONAsyncTask();
+                    //reqGET.execute("http://tomnab.fr/fixture/","cle=valeur");
 
-                        // http://tomnab.fr/chat-api/authenticate
-                        val reqPOST = PostAsyncTask()
-                        reqPOST.execute(
-                            "http://tomnab.fr/chat-api/authenticate",
-                            "user=" + edtLogin?.getText().toString()
-                                    + "&password=" + edtPasse?.getText().toString()
-                        )
+                    // http://tomnab.fr/chat-api/authenticate
+                    val reqPOST = PostAsyncTask()
+                    reqPOST.execute(
+                        "http://tomnab.fr/chat-api/authenticate",
+                        "user=" + edtLogin?.getText().toString()
+                                + "&password=" + edtPasse?.getText().toString()
+                    )
+                }
+                R.id.cbRemember -> if (cbRemember!!.isChecked()) {
+                    // on sauvegarde tout
+                    if (editor != null) {
+                        editor.putBoolean("remember", true)
+                        editor.putString("login", edtLogin?.getText().toString())
+                        editor.putString("passe", edtPasse?.getText().toString())
                     }
-                    R.id.cbRemember -> if (cbRemember!!.isChecked()) {
-                        // on sauvegarde tout
-                        if (editor != null) {
-                            editor.putBoolean("remember", true)
-                            editor.putString("login", edtLogin?.getText().toString())
-                            editor.putString("passe", edtPasse?.getText().toString())
-                        }
-                    } else {
-                        // on oublie tout
-                        editor?.putBoolean("remember", false)
-                        editor?.putString("login", "")
-                        editor?.putString("passe", "")
-                    }
+                } else {
+                    // on oublie tout
+                    editor?.putBoolean("remember", false)
+                    editor?.putString("login", "")
+                    editor?.putString("passe", "")
                 }
             }
-            editor?.commit()
         }
-//    })
-
-
+        editor?.commit()
+    }
 }
