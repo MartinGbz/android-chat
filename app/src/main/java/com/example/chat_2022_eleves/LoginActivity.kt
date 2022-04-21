@@ -66,8 +66,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 var s = ""
                 val tabProfs = result?.getJSONArray("enseignants")
-                if (tabProfs != null) {
-                    for (i in 0 until tabProfs.length()) {
+                tabProfs?.let {
+                    for (i in 0 until tabProfs!!.length()) {
                         val nextProf = tabProfs.getJSONObject(i)
                         s += (nextProf.getString("prenom") + " "
                                 + nextProf.getString("nom") + " ")
@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
 
         // Si le réseau est disponible, alors on réactive le bouton OK
-        btnLogin?.setEnabled(gs!!.verifReseau())
+        btnLogin?.isEnabled = gs!!.verifReseau()
 
         // relire les préférences de l'application
         // mettre à jour le formulaire
@@ -106,12 +106,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             // on coche la case
             edtLogin?.setText(sp!!.getString("login", ""))
             edtPasse?.setText(sp!!.getString("passe", ""))
-            cbRemember?.setChecked(true)
+            cbRemember?.isChecked = true
         } else {
             // on vide
             edtLogin?.setText("")
             edtPasse?.setText("")
-            cbRemember?.setChecked(false)
+            cbRemember?.isChecked = false
         }
     }
 
@@ -121,24 +121,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.getItemId()
+        val id = item.itemId
         when (id) {
             R.id.action_settings -> {
-                gs?.alerter("Préférences")
+                    gs?.alerter("Préférences")
 
-                // Changer d'activité pour afficher SettingsActivity
-                val toSettings = Intent(this, SettingsActivity::class.java)
-                startActivity(toSettings)
-            }
+                    // Changer d'activité pour afficher SettingsActivity
+                    val toSettings = Intent(this, SettingsActivity::class.java)
+                    startActivity(toSettings)
+                }
             R.id.action_account -> gs?.alerter("Compte")
         }
         return super.onOptionsItemSelected(item)
     }
 
     internal inner class PostAsyncTask : AsyncTask<String?, Void?, String?>() {
-        override fun onPreExecute() {
-            super.onPreExecute()
-        }
 
         override fun doInBackground(vararg data: String?): String? {
             val res = gs?.requetePOST(data[0], data[1])
@@ -166,8 +163,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         val editor = sp?.edit()
-        if (view != null) {
-            when (view.getId()) {
+        println(view)
+
+        view?.let {
+            when (view!!.id) {
                 R.id.btnLogin -> {
                     // TODO : il faudrait sauvegarder les identifiants dans les préférences
                     gs?.alerter("click OK")
@@ -179,23 +178,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val reqPOST = PostAsyncTask()
                     reqPOST.execute(
                         "http://tomnab.fr/chat-api/authenticate",
-                        "user=" + edtLogin?.getText().toString()
-                                + "&password=" + edtPasse?.getText().toString()
+                        "user=" + edtLogin?.text.toString() +
+                                "&password=" + edtPasse?.text.toString()
                     )
                 }
-                R.id.cbRemember -> if (cbRemember!!.isChecked()) {
-                    // on sauvegarde tout
-                    if (editor != null) {
-                        editor.putBoolean("remember", true)
-                        editor.putString("login", edtLogin?.getText().toString())
-                        editor.putString("passe", edtPasse?.getText().toString())
+                R.id.cbRemember -> {
+                    if (cbRemember!!.isChecked) {
+                        editor?.let {
+                            editor!!.putBoolean("remember", true)
+                            editor.putString("login", edtLogin?.text.toString())
+                            editor.putString("passe", edtPasse?.text.toString())
+                        }
                     }
-                } else {
-                    // on oublie tout
-                    editor?.putBoolean("remember", false)
-                    editor?.putString("login", "")
-                    editor?.putString("passe", "")
+                    else {
+                        editor?.putBoolean("remember", false)
+                        editor?.putString("login", "")
+                        editor?.putString("passe", "")
+                    }
                 }
+                else -> println("Unknown")
             }
         }
         editor?.commit()

@@ -14,9 +14,7 @@ import java.net.URL
 
 class GlobalState : Application() {
     fun alerter(s: String?) {
-        if (s != null) {
-            Log.i(CAT, s)
-        }
+        s ?: Log.i(CAT, s!!) // log si null
         val t = Toast.makeText(this, s, Toast.LENGTH_SHORT)
         t.show()
     }
@@ -28,12 +26,7 @@ class GlobalState : Application() {
             val sb = StringBuilder()
             var line: String? = null
             while (reader.readLine().also { line = it } != null) {
-                sb.append(
-                    """
-    $line
-    
-    """.trimIndent()
-                )
+                sb.append("""$line""".trimIndent())
             }
             sb.toString()
         } finally {

@@ -8,7 +8,7 @@ class ListConversations {
     var status: String? = null
     private var conversations: ArrayList<Conversation?>? = null
 
-    //{"version":1.3,"success":true,"status":200,"conversations"
+    // {"version":1.3,"success":true,"status":200,"conversations"
     override fun toString(): String {
         return "ListConversations{" +
                 "version='" + version + '\'' +

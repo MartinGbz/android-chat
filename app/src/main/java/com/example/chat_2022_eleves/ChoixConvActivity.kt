@@ -1,5 +1,6 @@
 package com.example.chat_2022_eleves
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -36,6 +37,7 @@ class ChoixConvActivity : AppCompatActivity() {
             return item
         }
 
+        @SuppressLint("ViewHolder")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             //return getCustomView(position, convertView, parent);
             val inflater = layoutInflater
