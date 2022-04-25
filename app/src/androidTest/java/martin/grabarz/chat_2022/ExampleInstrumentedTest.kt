@@ -1,8 +1,8 @@
 package martin.grabarz.chat_2022
 
-import okhttp3.logging.HttpLoggingInterceptor.setLevel
-import okhttp3.OkHttpClient.Builder.addInterceptor
-import okhttp3.OkHttpClient.Builder.build
+// import okhttp3.logging.HttpLoggingInterceptor.setLevel
+// import okhttp3.OkHttpClient.Builder.addInterceptor
+// import okhttp3.OkHttpClient.Builder.build
 import android.support.test.runner.AndroidJUnit4
 import android.support.test.InstrumentationRegistry
 import com.google.gson.annotations.SerializedName

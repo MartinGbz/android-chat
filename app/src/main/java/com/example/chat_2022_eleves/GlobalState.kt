@@ -4,13 +4,14 @@ import android.app.Application
 import android.widget.Toast
 import kotlin.Throws
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.util.Log
 import java.io.*
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import android.content.Context
+import android.net.NetworkCapabilities
 
 class GlobalState : Application() {
     fun alerter(s: String?) {
@@ -24,7 +25,7 @@ class GlobalState : Application() {
         return try {
             val reader = BufferedReader(InputStreamReader(`in`))
             val sb = StringBuilder()
-            var line: String? = null
+            var line: String?
             while (reader.readLine().also { line = it } != null) {
                 sb.append("""$line""".trimIndent())
             }
@@ -38,36 +39,30 @@ class GlobalState : Application() {
         }
     }
 
-    fun verifReseau(): Boolean {
-        // On vérifie si le réseau est disponible,
-        // si oui on change le statut du bouton de connexion
-        val cnMngr = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val netInfo = cnMngr.activeNetworkInfo
-        var sType = "Aucun réseau détecté"
-        var bStatut = false
-        if (netInfo != null) {
-            val netState = netInfo.state
-            if (netState.compareTo(NetworkInfo.State.CONNECTED) == 0) {
-                bStatut = true
-                val netType = netInfo.type
-                when (netType) {
-                    ConnectivityManager.TYPE_MOBILE -> sType = "Réseau mobile détecté"
-                    ConnectivityManager.TYPE_WIFI -> sType = "Réseau wifi détecté"
-                }
-            }
+    fun verifReseau(context: Context): Boolean {
+        // On vérifie si le réseau est disponible, si oui on change le statut du bouton de connexion
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCapabilities = connectivityManager.activeNetwork ?: return false
+        val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+        var bStatut = true
+        val sType: String = when {
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "Réseau wifi détecté"
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Réseau mobile détecté"
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> "Réseau ethernet détecté"
+            else -> "Aucun réseau détecté"
         }
         alerter(sType)
         return bStatut
     }
 
     fun requeteGET(urlData: String?, qs: String?): String? {
-        if (qs != null) {
+        qs?.let {
             try {
                 val url = URL("$urlData?$qs")
                 Log.i(CAT, "url utilisée : $url")
-                var urlConnection: HttpURLConnection? = null
+                var urlConnection: HttpURLConnection?
                 urlConnection = url.openConnection() as HttpURLConnection
-                var `in`: InputStream? = null
+                var `in`: InputStream?
                 `in` = BufferedInputStream(urlConnection.inputStream)
                 val txtReponse = convertStreamToString(`in`)
                 urlConnection.disconnect()
@@ -82,12 +77,12 @@ class GlobalState : Application() {
     }
 
     fun requetePOST(urlData: String?, qs: String?): String? {
-        var dataout: DataOutputStream? = null // new:POST
+        val dataout: DataOutputStream?
         if (qs != null) {
             try {
                 val url = URL(urlData) // new:POST
                 Log.i(CAT, "url utilisée : $url")
-                var urlConnection: HttpURLConnection? = null
+                var urlConnection: HttpURLConnection?
                 urlConnection = url.openConnection() as HttpURLConnection
 
                 // new:POST
@@ -103,7 +98,7 @@ class GlobalState : Application() {
                 dataout = DataOutputStream(urlConnection.outputStream)
                 dataout.writeBytes(qs)
                 // new:POST
-                var `in`: InputStream? = null
+                var `in`: InputStream?
                 `in` = BufferedInputStream(urlConnection.inputStream)
                 val txtReponse = convertStreamToString(`in`)
                 urlConnection.disconnect()
@@ -118,6 +113,6 @@ class GlobalState : Application() {
     }
 
     companion object {
-        val CAT: String? = "IG2I"
+        const val CAT: String = "IG2I"
     }
 }

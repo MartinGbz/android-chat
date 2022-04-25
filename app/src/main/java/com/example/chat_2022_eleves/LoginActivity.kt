@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
 
         // Si le réseau est disponible, alors on réactive le bouton OK
-        btnLogin?.isEnabled = gs!!.verifReseau()
+        btnLogin?.isEnabled = gs!!.verifReseau(this)
 
         // relire les préférences de l'application
         // mettre à jour le formulaire
@@ -75,6 +75,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     // Changer d'activité pour afficher SettingsActivity
                     val toSettings = Intent(this, SettingsActivity::class.java)
                     startActivity(toSettings)
+                    /*
+                    if (fragment == null) return
+                    val fm = supportFragmentManager
+                    val tr = fm.beginTransaction()
+                    tr.add(R.id.framlayout, fragment)
+                    tr.commitAllowingStateLoss()
+                    curFragment = fragment*/
+
                 }
             R.id.action_account -> gs?.alerter("Compte")
         }

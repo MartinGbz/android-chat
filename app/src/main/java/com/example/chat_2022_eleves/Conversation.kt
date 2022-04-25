@@ -5,7 +5,7 @@ class Conversation {
     var active: String? = null
     private var theme: String? = null
 
-    // {"id":"23","active":"0","theme":"test"
+    // {"id":"23","active":"0","theme":"test"}
     override fun toString(): String {
         return "Conversation{" +
                 "id='" + id + '\'' +
