@@ -62,6 +62,14 @@ class ChoixConvActivity : AppCompatActivity() {
         val hash = bdl?.getString("hash")
         val apiService = APIClient.getClient()?.create(APIInterface::class.java)
         val call1 = apiService?.doGetListConversation(hash)
+        println("bdl");
+        println(bdl);
+        println("hash");
+        println(hash);
+        println("apiService");
+        println(apiService);
+        println("call1");
+        println(call1);
         call1?.enqueue(object : Callback<ListConversations?> {
             override fun onResponse(
                 call: Call<ListConversations?>?,

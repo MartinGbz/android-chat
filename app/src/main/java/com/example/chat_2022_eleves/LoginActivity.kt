@@ -12,6 +12,11 @@ import android.content.Intent
 import android.util.Log
 import android.view.*
 import android.widget.*
+import kotlinx.coroutines.runBlocking
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var edtLogin: EditText? = null
@@ -20,65 +25,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var cbRemember: CheckBox? = null
     var sp: SharedPreferences? = null
     var gs: GlobalState? = null
-
-    internal inner class JSONAsyncTask : AsyncTask<String?, Void?, JSONObject?>() {
-        // Params, Progress, Result
-        override fun onPreExecute() {
-            super.onPreExecute()
-            Log.i(GlobalState.Companion.CAT, "onPreExecute")
-        }
-
-        override fun doInBackground(vararg data: String?): JSONObject? {
-            // pas d'interaction avec l'UI Thread ici
-            // String... data : ellipse
-            // data[0] contient le premier argument passé à .execute(...)
-            // data[1] contient le second argument passé à .execute(...)
-
-            // {"promo":"2020-2021",
-            // "enseignants":[
-            // {"prenom":"Mohamed","nom":"Boukadir"},
-            // {"prenom":"Thomas","nom":"Bourdeaud'huy"},
-            // {"prenom":"Mathieu","nom":"Haussher"},
-            // {"prenom":"Slim","nom":"Hammadi"}]}
-            Log.i(GlobalState.Companion.CAT, "doInBackground")
-            val res = gs?.requeteGET(data[0], data[1])
-            return try {
-                JSONObject(res)
-            } catch (e: JSONException) {
-                e.printStackTrace()
-                null
-            }
-        }
-
-        override fun onPostExecute(result: JSONObject?) {
-            Log.i(GlobalState.Companion.CAT, "onPostExecute")
-            // parcourir le json reçu et afficher les enseignants
-            gs?.alerter(result.toString())
-            // Utiliser la librairie gson pour l'afficher
-            val gson = GsonBuilder()
-                .serializeNulls()
-                .disableHtmlEscaping()
-                .setPrettyPrinting()
-                .create()
-            gs?.alerter(gson.toJson(result))
-            val p = gson.fromJson(result.toString(), Promo::class.java)
-            gs?.alerter(p.toString())
-            try {
-                var s = ""
-                val tabProfs = result?.getJSONArray("enseignants")
-                tabProfs?.let {
-                    for (i in 0 until tabProfs!!.length()) {
-                        val nextProf = tabProfs.getJSONObject(i)
-                        s += (nextProf.getString("prenom") + " "
-                                + nextProf.getString("nom") + " ")
-                    }
-                }
-                gs?.alerter(s)
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,12 +121,53 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     //reqGET.execute("http://tomnab.fr/fixture/","cle=valeur");
 
                     // http://tomnab.fr/chat-api/authenticate
-                    val reqPOST = PostAsyncTask()
-                    reqPOST.execute(
-                        "http://tomnab.fr/chat-api/authenticate",
-                        "user=" + edtLogin?.text.toString() +
-                                "&password=" + edtPasse?.text.toString()
-                    )
+
+//                    val reqPOST = PostAsyncTask()
+//                    reqPOST.execute(
+//                        "http://tomnab.fr/chat-api/authenticate",
+//                        "user=" + edtLogin?.text.toString() +
+//                                "&password=" + edtPasse?.text.toString()
+//                    )
+
+                    val apiService = APIClient.getClient()?.create(APIInterface::class.java)
+                    val loginObject = JSONObject()
+                    loginObject.put("user", edtLogin?.text.toString())
+                    loginObject.put("password", edtPasse?.text.toString())
+//                    val call1 = apiService?.doPostAuthentication(loginObject.toString().toRequestBody())
+                    val call1 = apiService?.doPostAuthentication("tomnab.fr",edtLogin?.text.toString(), edtPasse?.text.toString())
+                    call1?.enqueue(object : Callback<AuthenticationResponse?> {
+                        override fun onResponse(
+                            call: Call<AuthenticationResponse?>?,
+                            response: Response<AuthenticationResponse?>?
+                        ) {
+                            println("LOGIN WOOOOOORKED")
+                            val res = response?.body()
+//                            println(response)
+//                            println(call1)
+//                            println(call1.isCanceled)
+//                            println(call1.isExecuted)
+//                            println(call1.toString())
+//                            println(call)
+//                            println(call.toString())
+//                            println(res)
+                            Log.i(GlobalState.Companion.CAT, res.toString())
+                            if (res?.success.toBoolean() == true) {
+                                if (res?.hash === "") return
+                                val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
+                                val bdl = Bundle()
+                                bdl.putString("hash", res?.hash)
+                                versChoixConv.putExtras(bdl)
+                                startActivity(versChoixConv)
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<AuthenticationResponse?>?,
+                            t: Throwable?
+                        ) {
+                            call?.cancel()
+                        }
+                    })
                 }
                 R.id.cbRemember -> {
                     if (cbRemember!!.isChecked) {
