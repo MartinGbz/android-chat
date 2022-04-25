@@ -129,6 +129,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     // Changer d'activité pour afficher SettingsActivity
                     val toSettings = Intent(this, SettingsActivity::class.java)
                     startActivity(toSettings)
+                    /*
+                    if (fragment == null) return
+                    val fm = supportFragmentManager
+                    val tr = fm.beginTransaction()
+                    tr.add(R.id.framlayout, fragment)
+                    tr.commitAllowingStateLoss()
+                    curFragment = fragment*/
+
                 }
             R.id.action_account -> gs?.alerter("Compte")
         }
