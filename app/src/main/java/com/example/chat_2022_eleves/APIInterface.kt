@@ -6,8 +6,8 @@ import retrofit2.http.*
 
 interface APIInterface {
     @GET("conversations")
-    open fun doGetListConversation(@Header("hash") hash: String?): Call<ListConversations?>?
+    fun doGetListConversation(@Header("hash") hash: String?): Call<ListConversations?>?
 
     @POST("authenticate")
-    open fun doPostAuthentication(@Header("Host") host: String, @Query("user") user: String, @Query("password") password: String) : Call<AuthenticationResponse?>?
+    fun doPostAuthentication(@Header("Host") host: String, @Query("user") user: String, @Query("password") password: String) : Call<AuthenticationResponse?>?
 }

@@ -1,7 +1,7 @@
 package com.example.chat_2022_eleves
 
 import android.os.Bundle
-import android.support.v14.preference.PreferenceFragment
+//import android.support.v14.preference.PreferenceFragment
 
 // TODO:
 //  "That is because your SettingsActivity does not have Activity in its inheritance chain.
