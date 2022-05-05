@@ -66,18 +66,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when (id) {
             R.id.action_settings -> {
                     gs?.alerter("Préférences")
-
                     // Changer d'activité pour afficher SettingsActivity
                     val toSettings = Intent(this, SettingsActivity::class.java)
                     startActivity(toSettings)
-                    /*
-                    if (fragment == null) return
-                    val fm = supportFragmentManager
-                    val tr = fm.beginTransaction()
-                    tr.add(R.id.framlayout, fragment)
-                    tr.commitAllowingStateLoss()
-                    curFragment = fragment*/
-
                 }
             R.id.action_account -> gs?.alerter("Compte")
         }
@@ -91,57 +82,72 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         view?.let {
             when (view.id) {
                 R.id.btnLogin -> {
-                    // TODO : il faudrait sauvegarder les identifiants dans les préférences
-                    gs?.alerter("click OK")
-
-                    if (cbRemember!!.isChecked) {
-                        editor?.let {
-                            editor.putBoolean("remember", true)
-                            editor.putString("login", edtLogin?.text.toString())
-                            editor.putString("passe", edtPasse?.text.toString())
-                        }
-                    }
-                    else {
-                        editor?.putBoolean("remember", false)
-                        editor?.putString("login", "")
-                        editor?.putString("passe", "")
-                    }
-
-                    val apiService = APIClient.getClient()?.create(APIInterface::class.java)
-                    val loginObject = JSONObject()
-                    loginObject.put("user", edtLogin?.text.toString())
-                    loginObject.put("password", edtPasse?.text.toString())
-                    val call1 = apiService?.doPostAuthentication("tomnab.fr", edtLogin?.text.toString(), edtPasse?.text.toString())
-                    call1?.enqueue(object : Callback<AuthenticationResponse?> {
-                        override fun onResponse(
-                            call: Call<AuthenticationResponse?>?,
-                            response: Response<AuthenticationResponse?>?
-                        ) {
-                            println("LOGIN WOOOOOORKED")
-                            val res = response?.body()
-                            Log.i(GlobalState.Companion.CAT, res.toString())
-                            if (res?.success.toBoolean() == true) {
-                                println("SUCEEEEEEEEESS")
-                                if (res?.hash === "") return
-                                val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
-                                val bdl = Bundle()
-                                bdl.putString("hash", res?.hash)
-                                versChoixConv.putExtras(bdl)
-                                startActivity(versChoixConv)
-                            }
-                        }
-
-                        override fun onFailure(call: Call<AuthenticationResponse?>?, t: Throwable?) {
-                            call?.cancel()
-                        }
-                    })
-                }
-                R.id.cbRemember -> {
-
+                    manageLoginSaving(editor)
+                    loginRequest()
                 }
                 else -> println("Unknown")
             }
         }
         editor?.commit()
+    }
+
+
+    /**
+     * save login & password in preferences if the user ask for it
+     */
+    private fun manageLoginSaving(editor: SharedPreferences.Editor?) {
+        if (cbRemember!!.isChecked) {
+            modifyLoginPreferences(
+                editor,
+                true,
+                edtLogin?.text.toString(),
+                edtPasse?.text.toString()
+            )
+        } else {
+            modifyLoginPreferences(editor, false, "", "")
+        }
+    }
+
+    private fun loginRequest(): Unit? {
+        val apiService = APIClient.getClient()?.create(APIInterface::class.java)
+        val loginObject = JSONObject()
+        loginObject.put("user", edtLogin?.text.toString())
+        loginObject.put("password", edtPasse?.text.toString())
+        val call1 = apiService?.doPostAuthentication(
+            "tomnab.fr",
+            edtLogin?.text.toString(),
+            edtPasse?.text.toString()
+        )
+        return call1?.enqueue(object : Callback<AuthenticationResponse?> {
+            override fun onResponse(
+                call: Call<AuthenticationResponse?>?,
+                response: Response<AuthenticationResponse?>?
+            ) {
+                println("LOGIN WOOOOOORKED")
+                val res = response?.body()
+                Log.i(GlobalState.CAT, res.toString())
+                if (res?.success.toBoolean() == true) {
+                    println("SUCEEEEEEEEESS")
+                    if (res?.hash === "") return
+                    val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
+                    val bdl = Bundle()
+                    bdl.putString("hash", res?.hash)
+                    versChoixConv.putExtras(bdl)
+                    startActivity(versChoixConv)
+                }
+            }
+
+            override fun onFailure(call: Call<AuthenticationResponse?>?, t: Throwable?) {
+                call?.cancel()
+            }
+        })
+    }
+
+    private fun modifyLoginPreferences(editor: SharedPreferences.Editor?, remember: Boolean, login: String, password: String) {
+        editor?.let {
+            editor.putBoolean("remember", remember)
+            editor.putString("login", login)
+            editor.putString("passe", password)
+        }
     }
 }
