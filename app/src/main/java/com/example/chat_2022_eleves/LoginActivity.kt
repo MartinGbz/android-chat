@@ -94,6 +94,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     // TODO : il faudrait sauvegarder les identifiants dans les préférences
                     gs?.alerter("click OK")
 
+                    if (cbRemember!!.isChecked) {
+                        editor?.let {
+                            editor.putBoolean("remember", true)
+                            editor.putString("login", edtLogin?.text.toString())
+                            editor.putString("passe", edtPasse?.text.toString())
+                        }
+                    }
+                    else {
+                        editor?.putBoolean("remember", false)
+                        editor?.putString("login", "")
+                        editor?.putString("passe", "")
+                    }
+
                     val apiService = APIClient.getClient()?.create(APIInterface::class.java)
                     val loginObject = JSONObject()
                     loginObject.put("user", edtLogin?.text.toString())
@@ -118,27 +131,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             }
                         }
 
-                        override fun onFailure(
-                            call: Call<AuthenticationResponse?>?,
-                            t: Throwable?
-                        ) {
+                        override fun onFailure(call: Call<AuthenticationResponse?>?, t: Throwable?) {
                             call?.cancel()
                         }
                     })
                 }
                 R.id.cbRemember -> {
-                    if (cbRemember!!.isChecked) {
-                        editor?.let {
-                            editor.putBoolean("remember", true)
-                            editor.putString("login", edtLogin?.text.toString())
-                            editor.putString("passe", edtPasse?.text.toString())
-                        }
-                    }
-                    else {
-                        editor?.putBoolean("remember", false)
-                        editor?.putString("login", "")
-                        editor?.putString("passe", "")
-                    }
+
                 }
                 else -> println("Unknown")
             }
