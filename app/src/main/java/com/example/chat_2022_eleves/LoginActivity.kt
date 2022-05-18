@@ -3,7 +3,6 @@ package com.example.chat_2022_eleves
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
@@ -124,11 +123,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 call: Call<AuthenticationResponse?>?,
                 response: Response<AuthenticationResponse?>?
             ) {
-                println("LOGIN WOOOOOORKED")
                 val res = response?.body()
                 Log.i(GlobalState.CAT, res.toString())
-                if (res?.success.toBoolean() == true) {
-                    println("SUCEEEEEEEEESS")
+                if (res?.success.toBoolean()) {
                     if (res?.hash === "") return
                     val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
                     val bdl = Bundle()
@@ -146,9 +143,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun modifyLoginPreferences(editor: SharedPreferences.Editor?, remember: Boolean, login: String, password: String) {
         editor?.let {
-            editor.putBoolean("remember", remember)
-            editor.putString("login", login)
-            editor.putString("passe", password)
+            with(editor) {
+                putBoolean("remember", remember)
+                putString("login", login)
+                putString("passe", password)
+            }
         }
     }
 }
