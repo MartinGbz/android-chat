@@ -28,7 +28,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         edtPasse = findViewById(R.id.edtPasse)
         btnLogin = findViewById(R.id.btnLogin)
         cbRemember = findViewById(R.id.cbRemember)
-        sp = PreferenceManager.getDefaultSharedPreferences(this)
+//        sp = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
+//        sp = PreferenceManager.getDefaultSharedPreferences(this)
+        sp = this.getSharedPreferences("martin.grabarz.chat_2022_prreferences", MODE_PRIVATE)
         btnLogin?.setOnClickListener(this)
         cbRemember?.setOnClickListener(this)
         gs = application as GlobalState

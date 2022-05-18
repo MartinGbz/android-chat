@@ -25,3 +25,28 @@
             android:title="Passe" />
     </PreferenceCategory>
 </PreferenceScreen>
+<!--<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--        <CheckBoxPreference-->
+<!--            android:defaultValue="false"-->
+<!--            android:key="remember"-->
+<!--            android:summary="Indique si la sauvegarde des identifiants est active par défaut"-->
+<!--            android:title="Sauver Préférences" />-->
+<!--        <EditTextPreference-->
+<!--            android:defaultValue="http://tomnab.fr/chat-api/"-->
+<!--            android:key="urlData"-->
+<!--            android:summary="Adresse de la page fournissant les données d'absence. Utiliser 10.0.2.2 pour désigner le serveur sur lequel tourne l'émulateur"-->
+<!--            android:title="URL du serveur" />-->
+<!--        <PreferenceCategory-->
+<!--            android:key="identifiants"-->
+<!--            android:summary="Saisie des identifiants utilisateur"-->
+<!--            android:title="Identifiants">-->
+<!--            <EditTextPreference-->
+<!--                android:defaultValue=""-->
+<!--                android:key="login"-->
+<!--                android:title="Login" />-->
+<!--            <EditTextPreference-->
+<!--                android:defaultValue=""-->
+<!--                android:key="passe"-->
+<!--                android:title="Passe" />-->
+<!--        </PreferenceCategory>-->
+<!--</androidx.preference.PreferenceScreen>-->
