@@ -15,11 +15,6 @@
         android:theme="@style/Theme.Chat_2022_eleves"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".TestActivity"
-            android:exported="false"
-            android:label="@string/title_activity_test"
-            android:theme="@style/Theme.Chat_2022_eleves.NoActionBar" />
-        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
