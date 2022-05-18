@@ -1,7 +1,6 @@
 package com.example.chat_2022_eleves
 
 import android.os.Bundle
-//import androidx.preference.PreferenceFragmentCompat
 
 //import android.support.v14.preference.PreferenceFragment
 
