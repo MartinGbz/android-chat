@@ -13,7 +13,26 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="action_settings">Préférences</string>
+    <string name="action_account">Mon Compte</string>
+    <string name="titre">IAM-Chat !</string>
+    <string name="ok">OK</string>
+    <string name="mon_compte">Mon Compte</string>
+    <string name="conversation">Conversation</string>
+    <string name="preferences">Préférences</string>
+    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_compte">Compte</string>
+    <string name="title_activity_choix_conversation">ChoixConversation</string>
+    <string name="title_activity_show_conversation">ShowConversation</string>
+    <string-array name="couleurs">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+    </string-array>
+    <string name="title_activity_choix_conv">ChoixConvActivity</string>
+    <string name="couleur">Couleur Préférée :</string>
+
 </resources>
