@@ -1,14 +1,14 @@
 package com.example.chat_2022_eleves
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.content.SharedPreferences
-import org.json.JSONObject
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.content.Intent
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +28,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         edtPasse = findViewById(R.id.edtPasse)
         btnLogin = findViewById(R.id.btnLogin)
         cbRemember = findViewById(R.id.cbRemember)
-        sp = PreferenceManager.getDefaultSharedPreferences(this)
+        // Nom du fichier des preferences par défaut : PACKAGE_NAME_preferences
+        sp = this.getSharedPreferences("martin.grabarz.chat_2022_preferences", MODE_PRIVATE)
         btnLogin?.setOnClickListener(this)
         cbRemember?.setOnClickListener(this)
         gs = application as GlobalState
