@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 else -> println("Unknown")
             }
         }
-        editor?.commit()
+        editor?.apply()
     }
 
 
