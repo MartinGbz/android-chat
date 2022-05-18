@@ -1,7 +1,5 @@
 package com.example.chat_2022_eleves
 
-import java.util.ArrayList
-
 /**
  * Created by Martin Grabarz on 21/04/2022.
  */
