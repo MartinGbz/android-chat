@@ -2,6 +2,7 @@ package com.example.chat_2022_eleves
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +14,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class ChoixConvActivity : AppCompatActivity() {
+class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
     var gs: GlobalState? = null
     var spinConversations: Spinner? = null
+    var btnChoixConv: Button? = null
 
     inner class MyCustomAdapter(
         context: Context?,
@@ -59,20 +61,22 @@ class ChoixConvActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choix_conversation)
+        btnChoixConv = findViewById(R.id.btnChoixConv)
+        btnChoixConv?.setOnClickListener(this)
         gs = application as GlobalState
         val bdl = this.intent.extras
         gs!!.alerter("hash : " + (bdl?.getString("hash") ?: ""))
         val hash = bdl?.getString("hash")
         val apiService = APIClient.getClient()?.create(APIInterface::class.java)
         val call1 = apiService?.doGetListConversation(hash)
-        println("bdl");
-        println(bdl);
-        println("hash");
-        println(hash);
-        println("apiService");
-        println(apiService);
-        println("call1");
-        println(call1);
+        println("bdl")
+        println(bdl)
+        println("hash")
+        println(hash)
+        println("apiService")
+        println(apiService)
+        println("call1")
+        println(call1)
         call1?.enqueue(object : Callback<ListConversations?> {
             override fun onResponse(
                 call: Call<ListConversations?>?,
@@ -92,5 +96,25 @@ class ChoixConvActivity : AppCompatActivity() {
                 call?.cancel()
             }
         })
+    }
+
+    override fun onClick(view: View?) {
+        println(view)
+
+        view?.let {
+            when (view.id) {
+                R.id.btnChoixConv -> {
+                    gs!!.alerter("Btn choix cliqué")
+
+                    val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
+                    val bdl = Bundle()
+                    bdl.putString("data", "abcd")
+                    versAffichageConv.putExtras(bdl)
+                    startActivity(versAffichageConv)
+
+                }
+                else -> println("Unknown")
+            }
+        }
     }
 }
