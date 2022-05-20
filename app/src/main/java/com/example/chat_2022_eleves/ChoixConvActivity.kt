@@ -15,6 +15,7 @@ import retrofit2.Response
 import java.util.ArrayList
 
 class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
+
     var gs: GlobalState? = null
     var spinConversations: Spinner? = null
     var btnChoixConv: Button? = null
@@ -99,19 +100,16 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        println(view)
-
+        // println(view)
         view?.let {
             when (view.id) {
                 R.id.btnChoixConv -> {
-                    gs!!.alerter("Btn choix cliqué")
-
+                    // gs!!.alerter("Btn choix cliqué")
                     val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
                     val bdl = Bundle()
-                    bdl.putString("data", "abcd")
+                    bdl.putString("data", spinConversations?.selectedItem.toString())
                     versAffichageConv.putExtras(bdl)
                     startActivity(versAffichageConv)
-
                 }
                 else -> println("Unknown")
             }
