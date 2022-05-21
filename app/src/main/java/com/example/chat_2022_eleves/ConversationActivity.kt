@@ -1,12 +1,12 @@
 package com.example.chat_2022_eleves
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ScrollView
-import android.widget.Spinner
+import android.view.ViewGroup
+import android.widget.*
 import com.google.gson.Gson
 
 class ConversationActivity : AppCompatActivity(), View.OnClickListener {
@@ -31,6 +31,10 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         println(bdl)
 
         svMessages = findViewById<View?>(R.id.conversation_svMessages) as ScrollView
+
+        // svMessages.
+        // var obj = [{"id":"625"";contenu";"test";"auteur":"castor","couleur":"black"}]
+
 
     }
 
