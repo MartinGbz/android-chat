@@ -19,6 +19,7 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
     var gs: GlobalState? = null
     var spinConversations: Spinner? = null
     var btnChoixConv: Button? = null
+    var hash: String? = null
 
     inner class MyCustomAdapter(
         context: Context?,
@@ -67,7 +68,7 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
         gs = application as GlobalState
         val bdl = this.intent.extras
         gs!!.alerter("hash : " + (bdl?.getString("hash") ?: ""))
-        val hash = bdl?.getString("hash")
+        this.hash = bdl?.getString("hash")
         val apiService = APIClient.getClient()?.create(APIInterface::class.java)
         val call1 = apiService?.doGetListConversation(hash)
         println("bdl")
@@ -110,6 +111,7 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
                     val conv: Conversation = spinConversations?.selectedItem as Conversation
                     val convString = Gson().toJson(conv)
                     bdl.putString("data", convString)
+                    bdl.putString("hash", this.hash)
                     versAffichageConv.putExtras(bdl)
                     startActivity(versAffichageConv)
                 }

@@ -21,6 +21,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var btnEnvoiMessage: Button? = null
     var champTxtMessage : EditText? = null
     var svMessages: ScrollView? = null
+    var hash: String? = null
+    var conv: Conversation? = null
+    var messages: ListMessages? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +34,11 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         gs = application as GlobalState
         val bdl = this.intent.extras
         val convString = bdl?.getString("data") ?: ""
-        val conv = Gson().fromJson(convString, Conversation::class.java)
-        val id = conv.id
+        hash = bdl?.getString("hash") ?: ""
+        conv = Gson().fromJson(convString, Conversation::class.java)
+//        val id = this.conv.id
+
+        getConvMessagesRequest();
 
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
         println(bdl)
@@ -54,28 +60,19 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getConvMessagesRequest(): Unit? {
         val apiService = APIClient.getClient()?.create(APIInterface::class.java)
-        val call1 = apiService?.doPostAuthentication(
-            "tomnab.fr",
-
-        )
-        return call1?.enqueue(object : Callback<AuthenticationResponse?> {
+        val call1 = apiService?.doGetConvMessages(this.hash, this.conv?.id.toString())
+        return call1?.enqueue(object : Callback<ListMessages?> {
             override fun onResponse(
-                call: Call<AuthenticationResponse?>?,
-                response: Response<AuthenticationResponse?>?
+                call: Call<ListMessages?>?,
+                response: Response<ListMessages?>?
             ) {
                 val res = response?.body()
-                Log.i(GlobalState.CAT, res.toString())
+                Log.i("get messages", res.toString())
                 if (res?.success.toBoolean()) {
-                    if (res?.hash === "") return
-                    val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
-                    val bdl = Bundle()
-                    bdl.putString("hash", res?.hash)
-                    versChoixConv.putExtras(bdl)
-                    startActivity(versChoixConv)
+                    messages = res;
                 }
             }
-
-            override fun onFailure(call: Call<AuthenticationResponse?>?, t: Throwable?) {
+            override fun onFailure(call: Call<ListMessages?>?, t: Throwable?) {
                 call?.cancel()
             }
         })

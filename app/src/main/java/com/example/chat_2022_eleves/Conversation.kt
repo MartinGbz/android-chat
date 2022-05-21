@@ -1,7 +1,7 @@
 package com.example.chat_2022_eleves
 
 class Conversation(id: String, active: String, theme: String) {
-    var id: String? = null
+    val id: String? = null
     var active: String? = null
     private var theme: String? = null
 

@@ -7,20 +7,20 @@ class Message(id: String, contenu: String, auteur: String, couleur: String) {
     // }
 
     var id: String? = null
-    private var contenu: String? = null
-    private var auteur: String? = null
-    private var couleur: String? = null
+    var contenu: String? = null
+    var auteur: String? = null
+    var couleur: String? = null
 
-    fun getContenu(): String? {
-        return contenu
-    }
-
-    fun getAuteur(): String? {
-        return auteur
-    }
-
-    fun getCouleur(): String? {
-        return couleur
-    }
+//    fun getContenu(): String? {
+//        return contenu
+//    }
+//
+//    fun getAuteur(): String? {
+//        return auteur
+//    }
+//
+//    fun getCouleur(): String? {
+//        return couleur
+//    }
 
 }
