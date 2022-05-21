@@ -10,11 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
-import kotlinx.serialization.json.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.ProcessBuilder.Redirect.to
 
 class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -110,16 +108,8 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
                     val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
                     val bdl = Bundle()
                     val conv: Conversation = spinConversations?.selectedItem as Conversation
-                    val b = spinConversations?.selectedItem.toString()
-                    val test = Gson().toJson(conv)
-                    val test2 = Gson().fromJson(test, Conversation::class.java)
-//                    val jObjectInstance = JsonObject()
-//                    jObjectInstance.addProperty("name", conv.id);
-//                    val jsonList = Json.encodeToString(a);
-//                    Conversation a =
-//                    val jsonList = Json.stringify(Conversation, spinConversations?.selectedItem);
-//                    val q = Json.encodeToString(spinConversations?.selectedItem)
-                    bdl.putString("data", test)
+                    val convString = Gson().toJson(conv)
+                    bdl.putString("data", convString)
                     versAffichageConv.putExtras(bdl)
                     startActivity(versAffichageConv)
                 }
