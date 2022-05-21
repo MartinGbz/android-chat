@@ -1,16 +1,11 @@
 package com.example.chat_2022_eleves
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +31,6 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         val convString = bdl?.getString("data") ?: ""
         hash = bdl?.getString("hash") ?: ""
         conv = Gson().fromJson(convString, Conversation::class.java)
-//        val id = this.conv.id
 
         getConvMessagesRequest()
 
