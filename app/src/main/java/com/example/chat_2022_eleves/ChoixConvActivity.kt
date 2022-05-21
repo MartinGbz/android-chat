@@ -3,16 +3,16 @@ package com.example.chat_2022_eleves
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.ViewGroup
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
 
 class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -107,7 +107,9 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
                     // gs!!.alerter("Btn choix cliqué")
                     val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
                     val bdl = Bundle()
-                    bdl.putString("data", spinConversations?.selectedItem.toString())
+                    val conv: Conversation = spinConversations?.selectedItem as Conversation
+                    val convString = Gson().toJson(conv)
+                    bdl.putString("data", convString)
                     versAffichageConv.putExtras(bdl)
                     startActivity(versAffichageConv)
                 }

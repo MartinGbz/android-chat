@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.google.gson.Gson
 
 class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -20,7 +21,11 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         btnEnvoiMessage?.setOnClickListener(this)
         gs = application as GlobalState
         val bdl = this.intent.extras
+        val convString = bdl?.getString("data") ?: ""
+        val conv = Gson().fromJson(convString, Conversation::class.java)
+        val id = conv.id
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
+        println(bdl);
     }
 
     override fun onClick(view: View?) {
