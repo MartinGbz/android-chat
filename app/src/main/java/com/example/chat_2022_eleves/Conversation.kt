@@ -5,19 +5,15 @@ class Conversation(id: String, active: String, theme: String) {
     var active: String? = null
     private var theme: String? = null
 
-    override fun toString(): String {
-        return "Conversation{" +
-                "id='" + id + '\'' +
-                ", active='" + active + '\'' +
-                ", theme='" + theme + '\'' +
-                '}'
-    }
-
     fun getActive(): Boolean {
         return active == "1"
     }
 
     fun getTheme(): String? {
         return theme
+    }
+
+    override fun toString(): String {
+        return "Conversation(id=$id, active=$active, theme=$theme)"
     }
 }

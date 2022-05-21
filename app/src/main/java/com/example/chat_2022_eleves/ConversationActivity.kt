@@ -1,11 +1,17 @@
 package com.example.chat_2022_eleves
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.google.gson.Gson
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,6 +30,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         val convString = bdl?.getString("data") ?: ""
         val conv = Gson().fromJson(convString, Conversation::class.java)
         val id = conv.id
+
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
         println(bdl);
     }
@@ -37,6 +44,35 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 else -> println("Unknown")
             }
         }
+    }
+
+    private fun getConvMessagesRequest(): Unit? {
+        val apiService = APIClient.getClient()?.create(APIInterface::class.java)
+        val call1 = apiService?.doPostAuthentication(
+            "tomnab.fr",
+
+        )
+        return call1?.enqueue(object : Callback<AuthenticationResponse?> {
+            override fun onResponse(
+                call: Call<AuthenticationResponse?>?,
+                response: Response<AuthenticationResponse?>?
+            ) {
+                val res = response?.body()
+                Log.i(GlobalState.CAT, res.toString())
+                if (res?.success.toBoolean()) {
+                    if (res?.hash === "") return
+                    val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
+                    val bdl = Bundle()
+                    bdl.putString("hash", res?.hash)
+                    versChoixConv.putExtras(bdl)
+                    startActivity(versChoixConv)
+                }
+            }
+
+            override fun onFailure(call: Call<AuthenticationResponse?>?, t: Throwable?) {
+                call?.cancel()
+            }
+        })
     }
 
 }
