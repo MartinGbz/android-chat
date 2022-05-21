@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgreen"
+    android:background="@color/white"
     tools:context=".ChoixConvActivity">
 
     <TextView
@@ -23,10 +23,10 @@
         android:id="@+id/btnChoixConv"
         android:layout_width="127dp"
         android:layout_height="59dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:enabled="true"
-        android:text="OK"
+        android:text="GO"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinConversations" />
@@ -34,11 +34,10 @@
     <Spinner
         android:id="@+id/spinConversations"
 
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="392dp"
+        android:layout_height="149dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 

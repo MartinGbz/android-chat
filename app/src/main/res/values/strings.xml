@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Un petit chat :3</string>
-    <string name="appname">Chattons !</string>
+    <string name="app_name">Chat App</string>
+    <string name="appname">Connectez vous pour discuter !</string>
     <string name="login">Login :</string>
     <string name="passe">Mot de passe :</string>
     <string name="remember">Se souvenir de moi</string>
-    <string name="choix_conversation">Choix Conversation</string>
+    <string name="choix_conversation">Choisissez une conversation</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_test">TestActivity</string>
@@ -18,8 +18,8 @@
 
     <string name="action_settings">Préférences</string>
     <string name="action_account">Mon Compte</string>
-    <string name="titre">IAM-Chat !</string>
-    <string name="ok">OK</string>
+    <string name="send">Send</string>
+    <string name="validate">OK</string>
     <string name="mon_compte">Mon Compte</string>
     <string name="conversation">Conversation</string>
     <string name="preferences">Préférences</string>

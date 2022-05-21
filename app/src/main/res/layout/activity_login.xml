@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgreen"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="center|center_horizontal"
         android:text="@string/appname"
-        android:textSize="48sp"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:text="@string/login"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/edtLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -34,6 +36,7 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:text="@string/passe"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/edtPasse"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="OK"
+        android:text="LOGIN"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbRemember" />
