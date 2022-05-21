@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/system_accent1_100"
+    android:background="@color/white"
     tools:context=".ChoixConvActivity">
 
     <TextView
@@ -34,8 +34,8 @@
     <Spinner
         android:id="@+id/spinConversations"
 
-        android:layout_width="395dp"
-        android:layout_height="97dp"
+        android:layout_width="392dp"
+        android:layout_height="149dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

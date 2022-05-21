@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
+import android.widget.Spinner
 import com.google.gson.Gson
 
 class ConversationActivity : AppCompatActivity(), View.OnClickListener {
@@ -12,6 +14,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var gs: GlobalState? = null
     var btnEnvoiMessage: Button? = null
     var champTxtMessage : EditText? = null
+    var svMessages: ScrollView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,10 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         val conv = Gson().fromJson(convString, Conversation::class.java)
         val id = conv.id
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
-        println(bdl);
+        println(bdl)
+
+        svMessages = findViewById<View?>(R.id.conversation_svMessages) as ScrollView
+
     }
 
     override fun onClick(view: View?) {
