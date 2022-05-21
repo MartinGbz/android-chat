@@ -12,4 +12,7 @@ interface APIInterface {
 
     @GET("conversations/{id}/messages")
     fun doGetConvMessages(@Header("hash") hash: String?, @Path("id") id: String): Call<ListMessages?>?
+
+    @POST("conversations/{id}/messages")
+    fun doPostMessage(@Header("hash") hash: String?, @Path("id") id: String,  @Query("contenu") contenu: String): Call<PostMessageResponse?>?
 }

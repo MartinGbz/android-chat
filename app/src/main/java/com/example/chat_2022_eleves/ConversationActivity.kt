@@ -38,7 +38,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         conv = Gson().fromJson(convString, Conversation::class.java)
 //        val id = this.conv.id
 
-        getConvMessagesRequest();
+        getConvMessagesRequest()
 
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
         println(bdl)
@@ -52,6 +52,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
             when (view.id) {
                 R.id.conversation_btnOK -> {
                     gs!!.alerter("message : " + champTxtMessage?.text.toString())
+                    postMessageRequest(champTxtMessage?.text.toString())
                 }
                 else -> println("Unknown")
             }
@@ -69,10 +70,27 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 val res = response?.body()
                 Log.i("get messages", res.toString())
                 if (res?.success.toBoolean()) {
-                    messages = res;
+                    messages = res
                 }
             }
             override fun onFailure(call: Call<ListMessages?>?, t: Throwable?) {
+                call?.cancel()
+            }
+        })
+    }
+
+    private fun postMessageRequest(message: String): Unit? {
+        val apiService = APIClient.getClient()?.create(APIInterface::class.java)
+        val call1 = apiService?.doPostMessage(this.hash, this.conv?.id.toString(), message)
+        return call1?.enqueue(object : Callback<PostMessageResponse?> {
+            override fun onResponse(
+                call: Call<PostMessageResponse?>?,
+                response: Response<PostMessageResponse?>?
+            ) {
+                val res = response?.body()
+                Log.i("POST MESSAGE", res.toString())
+            }
+            override fun onFailure(call: Call<PostMessageResponse?>?, t: Throwable?) {
                 call?.cancel()
             }
         })
