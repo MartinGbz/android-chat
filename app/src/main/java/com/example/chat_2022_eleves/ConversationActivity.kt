@@ -1,14 +1,14 @@
 package com.example.chat_2022_eleves
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ScrollView
-import android.widget.Spinner
+import android.view.ViewGroup
+import android.widget.*
 import com.google.gson.Gson
 import org.json.JSONObject
 import retrofit2.Call
@@ -44,6 +44,10 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         println(bdl)
 
         svMessages = findViewById<View?>(R.id.conversation_svMessages) as ScrollView
+
+        // svMessages.
+        // var obj = [{"id":"625"";contenu";"test";"auteur":"castor","couleur":"black"}]
+
 
     }
 
