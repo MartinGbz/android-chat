@@ -22,10 +22,12 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var hash: String? = null
     var conv: Conversation? = null
     var messages: ListMessages? = null
+    var list = ArrayList<String>()
     var arrayAdapter: Adapter? = null
+//    val arrayAdapter: Adapter? = null
+//    var arrayAdapter2: MessageAdapter? = null
 //    var list: Array<String?> = arrayOfNulls(0)
 //    var list: ArrayList<String?>? = arrayListOf(null)
-    var list = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +47,22 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
         getConvMessagesRequest()
 
+
+        lvMessages?.adapter = arrayAdapter as ArrayAdapter<*>
+//        arrayAdapter.clear()
+//        arrayAdapter.notifyDataSetChanged()
+
         arrayAdapter = ArrayAdapter<String>(
             this,
             android.R.layout.simple_list_item_1,
             list
         )
-        lvMessages?.adapter = arrayAdapter as ArrayAdapter<*>
+
+
+
+
+//        arrayAdapter2 = MessageAdapter()
+
 
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
         println(bdl)
@@ -103,6 +115,10 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 //                    notifyDataSetChanged();
                     println(list)
 //                    list = messagesList
+
+                    lvMessages?.adapter = arrayAdapter as ArrayAdapter<*>
+                    arrayAdapter.clear()
+                    arrayAdapter.notifyDataSetChanged()
 
 //                    arrayAdapter.swapData(messagesList)
 //                    val a = ArrayAdapter(this, android.R.layout.simple_list_item_1, )
