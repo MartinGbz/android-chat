@@ -39,8 +39,8 @@
         android:enabled="true"
         android:text="@string/send" />
 
-    <ScrollView
-        android:id="@+id/conversation_svMessages"
+    <ListView
+        android:id="@+id/conversation_lvMessages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/conversation_btnOK"
@@ -48,15 +48,26 @@
         android:layout_alignStart="@+id/conversation_titre"
         android:layout_alignParentEnd="true"
         android:background="@color/white">
+    </ListView>
 
-        <LinearLayout
-            android:id="@+id/conversation_svLayoutMessages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+<!--    <ScrollView-->
+<!--        android:id="@+id/conversation_svMessages"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/conversation_btnOK"-->
+<!--        android:layout_below="@+id/conversation_titre"-->
+<!--        android:layout_alignStart="@+id/conversation_titre"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:background="@color/white">-->
 
-        </LinearLayout>
-    </ScrollView>
+<!--        <LinearLayout-->
+<!--            android:id="@+id/conversation_svLayoutMessages"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
 
     <TextView
         android:id="@+id/conversation_titre"

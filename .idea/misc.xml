@@ -4,19 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../../layout/custom_preview.xml" value="0.18888888888888888" />
-        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_choix_conversation.xml" value="0.2" />
+        <entry key="../../../../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.5026041666666666" />
+        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_choix_conversation.xml" value="0.196875" />
         <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_compte.xml" value="0.25416666666666665" />
         <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_login.xml" value="0.196875" />
-        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_show_conversation.xml" value="0.152" />
-        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_test.xml" value="0.7741935483870968" />
-        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/content_test.xml" value="1.2" />
-        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/spinner_item.xml" value="0.11277173913043478" />
+        <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/layout/activity_show_conversation.xml" value="0.25416666666666665" />
         <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/menu/menu.xml" value="0.20555555555555555" />
         <entry key="..\:/Program Files/Android/AndroidStudioProjects/android-chat/app/src/main/res/xml/preferences.xml" value="0.264" />
         <entry key="app/src/main/res/layout/activity_choix_conversation.xml" value="0.15374873353596757" />
         <entry key="app/src/main/res/layout/activity_conversations.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4349939246658566" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/activity_show_conversation.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/layout/fragment_blank2.xml" value="0.15830800405268491" />
         <entry key="app/src/main/res/xml/preferences.xml" value="0.17300724637681159" />
