@@ -3,10 +3,11 @@ package com.example.chat_2022_eleves
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+//import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

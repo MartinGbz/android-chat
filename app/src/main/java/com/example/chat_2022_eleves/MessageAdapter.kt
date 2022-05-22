@@ -1,7 +1,6 @@
 package com.example.chat_2022_eleves
 
 import android.content.Context
-import android.support.annotation.LayoutRes
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -35,9 +34,9 @@ class MessageAdapter : BaseAdapter() {
         return i.toLong()
     }
 
-//    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-//        TODO("Not yet implemented")
-//    }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        TODO("Not yet implemented")
+    }
 
     // This is the backbone of the class, it handles the creation of single ListView row (chat bubble)
 //    override fun getView(i: Int, convertView: View, viewGroup: ViewGroup?): View? {

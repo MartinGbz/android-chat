@@ -39,19 +39,18 @@
         android:enabled="true"
         android:text="@string/send" />
 
-    <ListView
-        android:id="@+id/conversation_lvMessages"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/conversationRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/conversation_btnOK"
         android:layout_below="@+id/conversation_titre"
         android:layout_alignStart="@+id/conversation_titre"
         android:layout_alignParentEnd="true"
-        android:background="@color/white">
-    </ListView>
+        tools:context=".ConversationActivity" />
 
-<!--    <ScrollView-->
-<!--        android:id="@+id/conversation_svMessages"-->
+<!--    <ListView-->
+<!--        android:id="@+id/conversation_lvMessages"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_above="@+id/conversation_btnOK"-->
@@ -59,15 +58,7 @@
 <!--        android:layout_alignStart="@+id/conversation_titre"-->
 <!--        android:layout_alignParentEnd="true"-->
 <!--        android:background="@color/white">-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/conversation_svLayoutMessages"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
+<!--    </ListView>-->
 
     <TextView
         android:id="@+id/conversation_titre"
@@ -83,3 +74,10 @@
         android:textStyle="bold" />
 
 </RelativeLayout>
+
+    <!--<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:id="@+id/conversationRecyclerView"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    tools:context=".ConversationActivity" />-->
