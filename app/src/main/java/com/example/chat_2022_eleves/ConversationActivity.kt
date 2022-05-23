@@ -24,6 +24,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var messages: ListMessages? = null
     var list = ArrayList<String>()
     lateinit var conversationRecyclerView: RecyclerView
+    var testPseudo = "toto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +80,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 //                    list.clear();
 //                    list.addAll(messagesList);
                     print(messages?.getMessages())
-                    conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages())
+                    conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages(), testPseudo)
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
                     conversationRecyclerView.smoothScrollToPosition(messages?.getMessages()!!.size)
                 }

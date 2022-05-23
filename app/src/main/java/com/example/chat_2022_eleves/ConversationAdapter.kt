@@ -1,11 +1,12 @@
 package com.example.chat_2022_eleves
 
 import android.annotation.SuppressLint
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.graphics.Color
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chat_2022_eleves.databinding.MessageBinding
@@ -14,7 +15,7 @@ import com.example.chat_2022_eleves.databinding.MessageBinding
 /**
  * Created by Martin Grabarz on 22/05/2022.
  */
-class ConversationAdapter(val items: ArrayList<Message?>?) : RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
+class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: String) : RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
 //    val BLACK = "#FF000000"
 //    val WHITE = "#FFFFFFFF"
 //    val RED = "#F44336"
@@ -57,12 +58,28 @@ class ConversationAdapter(val items: ArrayList<Message?>?) : RecyclerView.Adapte
     @ColorInt
     val TRANSPARENT = 0
 
+    var sp: SharedPreferences? = null
+
     inner class ViewHolder(val binding: MessageBinding) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("ResourceAsColor")
-        fun bindAndVersion(message: Message) {
+        @SuppressLint("ResourceAsColor", "RtlHardcoded")
+        fun bindAndVersion(message: Message, testPseudo: String) {
             with(message) {
                 binding.messageTxt.text = message.contenu
                 binding.auteurTxt.text = message.auteur
+                println(testPseudo)
+//                binding.bubble.setHorizontalGravity(Gravity.RIGHT)
+                val params = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    bottomMargin = 10
+                    gravity = Gravity.RIGHT
+                }
+                binding.bubble.layoutParams = params
+//                binding.bubble.gravity = Gravity.RIGHT
+//                binding.bubble.setHorizontalGravity(Gravity.RIGHT)
+//                binding.bubble.setVerticalGravity(Gravity.RIGHT)
+
 //                var a = Color.parseColor("#FF0000")
 //                var a = 0xFF000000
 //                var a = findColor(message.couleur!!)
@@ -79,7 +96,7 @@ class ConversationAdapter(val items: ArrayList<Message?>?) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindAndVersion(items!![position]!!)
+        holder.bindAndVersion(items!![position]!!, testPseudo)
     }
 
 //    private fun findColor(color : String): Int {
