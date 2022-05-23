@@ -76,16 +76,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 Log.i("get messages", res.toString())
                 if (res?.success.toBoolean()) {
                     messages = res
-                    val messagesList = arrayListOf<String>()
-                    for (m in messages?.getMessages()!!) {
-                        if (m != null) {
-                            messagesList.add(m.contenu!!)
-                        }
-                    }
-                    println(messagesList)
-                    list.clear();
-                    list.addAll(messagesList);
-                    println(list)
+//                    list.clear();
+//                    list.addAll(messagesList);
+                    print(messages?.getMessages())
                     conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages())
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
                     conversationRecyclerView.smoothScrollToPosition(messages?.getMessages()!!.size)
