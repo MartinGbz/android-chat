@@ -88,6 +88,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                     println(list)
                     conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages())
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
+                    conversationRecyclerView.smoothScrollToPosition(messages?.getMessages()!!.size)
                 }
             }
 
