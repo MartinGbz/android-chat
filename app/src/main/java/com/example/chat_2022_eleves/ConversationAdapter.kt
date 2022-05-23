@@ -68,12 +68,24 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
                 binding.auteurTxt.text = message.auteur
                 println(testPseudo)
 //                binding.bubble.setHorizontalGravity(Gravity.RIGHT)
-                val params = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    bottomMargin = 10
-                    gravity = Gravity.RIGHT
+                val params : FrameLayout.LayoutParams
+                if(message.auteur == testPseudo) {
+                    params = FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        bottomMargin = 10
+                        gravity = Gravity.RIGHT
+                    }
+                }
+                else {
+                    params = FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        bottomMargin = 10
+                        gravity = Gravity.LEFT
+                    }
                 }
                 binding.bubble.layoutParams = params
 //                binding.bubble.gravity = Gravity.RIGHT
