@@ -8,6 +8,9 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.chat_2022_eleves.api.APIClient
+import com.example.chat_2022_eleves.api.APIInterface
+import com.example.chat_2022_eleves.api.AuthenticationResponse
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,5 +1,6 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.model
 
+import com.example.chat_2022_eleves.model.Enseignant
 import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 

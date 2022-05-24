@@ -1,5 +1,6 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.model
 
+import com.example.chat_2022_eleves.model.Conversation
 import java.util.ArrayList
 
 class ListConversations {
@@ -8,7 +9,6 @@ class ListConversations {
     var status: String? = null
     private var conversations: ArrayList<Conversation?>? = null
 
-    // {"version":1.3,"success":true,"status":200,"conversations"
     override fun toString(): String {
         return "ListConversations{" +
                 "version='" + version + '\'' +

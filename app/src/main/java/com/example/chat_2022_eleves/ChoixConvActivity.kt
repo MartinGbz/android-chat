@@ -10,6 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.chat_2022_eleves.api.APIClient
+import com.example.chat_2022_eleves.api.APIInterface
+import com.example.chat_2022_eleves.model.Conversation
+import com.example.chat_2022_eleves.model.ListConversations
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

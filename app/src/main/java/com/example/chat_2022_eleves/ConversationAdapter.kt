@@ -6,10 +6,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chat_2022_eleves.databinding.MessageBinding
+import com.example.chat_2022_eleves.model.Message
 
 
 /**

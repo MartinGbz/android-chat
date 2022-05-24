@@ -1,4 +1,4 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.model
 
 class Enseignant {
     private val prenom: String? = null

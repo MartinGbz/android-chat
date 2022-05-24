@@ -1,4 +1,4 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.api
 
 import retrofit2.Retrofit
 import okhttp3.logging.HttpLoggingInterceptor

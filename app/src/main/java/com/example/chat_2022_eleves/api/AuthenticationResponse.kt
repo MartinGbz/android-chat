@@ -1,4 +1,4 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.api
 
 /**
  * Created by Martin Grabarz on 21/04/2022.
@@ -9,7 +9,6 @@ class AuthenticationResponse {
     var status: String? = null
     var hash: String? = null
 
-    // {"version":1.3,"success":true,"status":200,"conversations"
     override fun toString(): String {
         return "ListConversations{" +
                 "version='" + version + '\'' +

@@ -1,6 +1,6 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.api
 
-import java.util.ArrayList
+import com.example.chat_2022_eleves.model.Message
 
 /**
  * Created by Martin Grabarz on 21/05/2022.

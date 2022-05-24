@@ -1,5 +1,7 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.api
 
+import com.example.chat_2022_eleves.model.ListConversations
+import com.example.chat_2022_eleves.model.ListMessages
 import retrofit2.Call
 import retrofit2.http.*
 

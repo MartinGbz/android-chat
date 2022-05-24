@@ -8,6 +8,11 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.chat_2022_eleves.api.APIClient
+import com.example.chat_2022_eleves.api.APIInterface
+import com.example.chat_2022_eleves.api.PostMessageResponse
+import com.example.chat_2022_eleves.model.Conversation
+import com.example.chat_2022_eleves.model.ListMessages
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,11 +28,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var pseudo: String? = ""
     var conv: Conversation? = null
     var messages: ListMessages? = null
-    var list = ArrayList<String>()
     lateinit var conversationRecyclerView: RecyclerView
-    var skipBottomEvent = true
-    var isAtBottom = true
-//    var testPseudo = "toto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +41,8 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
         btnEnvoiMessage?.setOnClickListener(this)
 
-        conversationRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (!recyclerView.canScrollVertically(1)) {
-//                    Toast.makeText(this@ConversationActivity, "Last", Toast.LENGTH_LONG).show()
-//                    if(!skipBottomEvent && !isAtBottom) {
-//                        getConvMessagesRequest()
-//                    }
-//                    else {
-//                        skipBottomEvent = false
-//                    }
-//                    isAtBottom = false
-//                }
-//            }
-        })
-
         gs = application as GlobalState
+
         val bdl = this.intent.extras
         val convString = bdl?.getString("data") ?: ""
         hash = bdl?.getString("hash")
@@ -66,12 +52,6 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         getConvMessagesRequest()
 
         gs!!.alerter("data : " + (bdl?.getString("data") ?: ""))
-        println(bdl)
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        conversationRecyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onClick(view: View?) {
@@ -95,10 +75,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 response: Response<ListMessages?>?
             ) {
                 val res = response?.body()
-                Log.i("get messages", res.toString())
+                Log.i("GET MESSAGE", res.toString())
                 if (res?.success.toBoolean()) {
                     messages = res
-                    print(messages?.getMessages())
                     conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages(), pseudo!!)
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
                     conversationRecyclerView.scrollToPosition(messages?.getMessages()!!.size-1)

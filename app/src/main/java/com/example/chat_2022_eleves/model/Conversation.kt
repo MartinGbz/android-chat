@@ -1,4 +1,4 @@
-package com.example.chat_2022_eleves
+package com.example.chat_2022_eleves.model
 
 class Conversation(id: String, active: String, theme: String) {
     val id: String? = null
