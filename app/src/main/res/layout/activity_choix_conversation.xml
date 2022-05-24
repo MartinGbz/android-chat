@@ -28,15 +28,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
     </ListView>
-
-    <!--    <Spinner-->
-<!--        android:id="@+id/spinConversations"-->
-
-<!--        android:layout_width="392dp"-->
-<!--        android:layout_height="149dp"-->
-<!--        android:layout_marginTop="48dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
