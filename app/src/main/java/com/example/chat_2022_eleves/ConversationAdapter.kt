@@ -74,7 +74,7 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        bottomMargin = 10
+                        bottomMargin = 30
                         gravity = Gravity.RIGHT
                     }
                 }
@@ -83,7 +83,7 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        bottomMargin = 10
+                        bottomMargin = 30
                         gravity = Gravity.LEFT
                     }
                 }

@@ -131,6 +131,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val versChoixConv = Intent(this@LoginActivity, ChoixConvActivity::class.java)
                     val bdl = Bundle()
                     bdl.putString("hash", res?.hash)
+                    bdl.putString("pseudo", edtLogin?.text.toString())
                     println(edtLogin?.text.toString())
                     println(edtPasse?.text.toString())
                     versChoixConv.putExtras(bdl)

@@ -20,11 +20,12 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var btnEnvoiMessage: Button? = null
     var champTxtMessage : EditText? = null
     var hash: String? = null
+    var pseudo: String? = ""
     var conv: Conversation? = null
     var messages: ListMessages? = null
     var list = ArrayList<String>()
     lateinit var conversationRecyclerView: RecyclerView
-    var testPseudo = "toto"
+//    var testPseudo = "toto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,8 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         gs = application as GlobalState
         val bdl = this.intent.extras
         val convString = bdl?.getString("data") ?: ""
-        hash = bdl?.getString("hash") ?: ""
+        hash = bdl?.getString("hash")
+        pseudo = bdl?.getString("pseudo") ?: ""
         conv = Gson().fromJson(convString, Conversation::class.java)
 
         getConvMessagesRequest()
@@ -80,7 +82,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 //                    list.clear();
 //                    list.addAll(messagesList);
                     print(messages?.getMessages())
-                    conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages(), testPseudo)
+                    conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages(), pseudo!!)
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
                     conversationRecyclerView.smoothScrollToPosition(messages?.getMessages()!!.size)
                 }
