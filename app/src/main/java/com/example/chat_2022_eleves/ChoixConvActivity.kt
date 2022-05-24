@@ -27,7 +27,9 @@ class ChoixConvActivity : AppCompatActivity() {
     inner class MyCustomAdapter(
         context: Context?,
         private val layoutId: Int,
-        private val dataConvs: ArrayList<Conversation?>?
+        private val dataConvs: ArrayList<Conversation?>?,
+        hash: String ,
+        pseudo: String
     ) : ArrayAdapter<Conversation?>(context!!, layoutId, dataConvs!!) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
@@ -59,10 +61,18 @@ class ChoixConvActivity : AppCompatActivity() {
             val icon = item.findViewById<View?>(R.id.spinner_icon) as ImageView
             if (nextC?.getActive() == true) icon.setImageResource(R.drawable.icon)
             else icon.setImageResource(R.drawable.icongray)
-
             listConversations?.setOnItemClickListener { parent, _, position, _ ->
                 val selectedItem = parent.getItemAtPosition(position) as Conversation
                 print(selectedItem)
+                val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
+                val bdl = Bundle()
+//                val conv: Conversation = listConversations?.selectedItem as Conversation
+                val convString = Gson().toJson(selectedItem)
+                bdl.putString("data", convString)
+                bdl.putString("hash", hash)
+                bdl.putString("pseudo", pseudo)
+                versAffichageConv.putExtras(bdl)
+                startActivity(versAffichageConv)
             }
             return item
         }
@@ -71,34 +81,6 @@ class ChoixConvActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choix_conversation)
-
-//        val list = mutableListOf(
-//            "African violet",
-//            "Alloy orange",
-//            "Amaranth pink",
-//            "Apple green",
-//            "Beau blue",
-//            "Black chocolate"
-//        )
-//
-//
-//        val adapter = ArrayAdapter<String>(
-//            this,
-//            android.R.layout.simple_list_item_1,list
-//        )
-//
-//        // attach the array adapter with list view
-//        listConversations?.adapter = adapter
-
-        // list view item click listener
-
-
-//        listConversations?.setOnItemClickListener { parent, _, position, _ ->
-//            val selectedItem = parent.getItemAtPosition(position) as Conversation
-//            print(selectedItem)
-//        }
-//        btnChoixConv = findViewById(R.id.btnChoixConv)
-//        btnChoixConv?.setOnClickListener(this)
         gs = application as GlobalState
         val bdl = this.intent.extras
         gs!!.alerter("hash : " + (bdl?.getString("hash") ?: ""))
@@ -125,7 +107,9 @@ class ChoixConvActivity : AppCompatActivity() {
                 listConversations!!.adapter = MyCustomAdapter(
                     this@ChoixConvActivity,
                     R.layout.spinner_item,
-                    listeConvs?.getConversations()
+                    listeConvs?.getConversations(),
+                    hash!!,
+                    pseudo!!,
                 )
 //                spinConversations = findViewById<View?>(R.id.spinConversations) as Spinner
 //                spinConversations!!.adapter = MyCustomAdapter(
