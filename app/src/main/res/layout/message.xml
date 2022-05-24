@@ -18,14 +18,14 @@
         <TextView
             android:id="@+id/messageTxt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/auteurTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="10sp"
             android:textColor="@color/light_black"
-            android:textStyle="bold"
             tools:ignore="SmallSp" />
     </LinearLayout>
 </FrameLayout>

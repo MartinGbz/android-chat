@@ -22,41 +22,18 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
 //    val GREEN = "#009688"
 //    val BLUE = "#2196F3"
 
-    @ColorInt
-    val BLACK = 0xff000000
-
-    @ColorInt
-    val DKGRAY = -0xbbbbbc
-
-    @ColorInt
-    val GRAY = -0x777778
-
-    @ColorInt
-    val LTGRAY = -0x333334
-
-    @ColorInt
-    val WHITE = -0x1
-
-    @ColorInt
-    val RED = -0x10000
-
-    @ColorInt
-    val GREEN = -0xff0100
-
-    @ColorInt
-    val BLUE = -0xffff01
-
-    @ColorInt
-    val YELLOW = -0x100
-
-    @ColorInt
-    val CYAN = -0xff0001
-
-    @ColorInt
-    val MAGENTA = -0xff01
-
-    @ColorInt
-    val TRANSPARENT = 0
+//    @ColorInt val BLACK = 0xff000000
+//    @ColorInt val DKGRAY = -0xbbbbbc
+//    @ColorInt val GRAY = -0x777778
+//    @ColorInt val LTGRAY = -0x333334
+//    @ColorInt val WHITE = -0x1
+//    @ColorInt val RED = -0x10000
+//    @ColorInt val GREEN = -0xff0100
+//    @ColorInt val BLUE = -0xffff01
+//    @ColorInt val YELLOW = -0x100
+//    @ColorInt val CYAN = -0xff0001
+//    @ColorInt val MAGENTA = -0xff01
+//    @ColorInt val TRANSPARENT = 0
 
     var sp: SharedPreferences? = null
 
@@ -67,7 +44,6 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
                 binding.messageTxt.text = message.contenu
                 binding.auteurTxt.text = message.auteur
                 println(testPseudo)
-//                binding.bubble.setHorizontalGravity(Gravity.RIGHT)
                 val params : FrameLayout.LayoutParams
                 if(message.auteur == testPseudo) {
                     params = FrameLayout.LayoutParams(
@@ -89,8 +65,6 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
                 }
                 binding.bubble.layoutParams = params
 //                binding.bubble.gravity = Gravity.RIGHT
-//                binding.bubble.setHorizontalGravity(Gravity.RIGHT)
-//                binding.bubble.setVerticalGravity(Gravity.RIGHT)
 
 //                var a = Color.parseColor("#FF0000")
 //                var a = 0xFF000000

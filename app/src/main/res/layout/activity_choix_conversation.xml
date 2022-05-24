@@ -19,26 +19,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnChoixConv"
-        android:layout_width="127dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:enabled="true"
-        android:text="GO"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinConversations" />
-
-    <Spinner
-        android:id="@+id/spinConversations"
-
-        android:layout_width="392dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="48dp"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listConversations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+    </ListView>
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinConversations"-->
+
+<!--        android:layout_width="392dp"-->
+<!--        android:layout_height="149dp"-->
+<!--        android:layout_marginTop="48dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

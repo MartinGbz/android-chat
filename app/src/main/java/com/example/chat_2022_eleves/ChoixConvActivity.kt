@@ -15,11 +15,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
+class ChoixConvActivity : AppCompatActivity() {
 
     var gs: GlobalState? = null
-    var spinConversations: Spinner? = null
-    var btnChoixConv: Button? = null
+//    var spinConversations: Spinner? = null
+    var listConversations : ListView? = null
+//    var btnChoixConv: Button? = null
     var hash: String? = null
     var pseudo: String? = null
 
@@ -58,6 +59,11 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
             val icon = item.findViewById<View?>(R.id.spinner_icon) as ImageView
             if (nextC?.getActive() == true) icon.setImageResource(R.drawable.icon)
             else icon.setImageResource(R.drawable.icongray)
+
+            listConversations?.setOnItemClickListener { parent, _, position, _ ->
+                val selectedItem = parent.getItemAtPosition(position) as Conversation
+                print(selectedItem)
+            }
             return item
         }
     }
@@ -65,8 +71,34 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choix_conversation)
-        btnChoixConv = findViewById(R.id.btnChoixConv)
-        btnChoixConv?.setOnClickListener(this)
+
+//        val list = mutableListOf(
+//            "African violet",
+//            "Alloy orange",
+//            "Amaranth pink",
+//            "Apple green",
+//            "Beau blue",
+//            "Black chocolate"
+//        )
+//
+//
+//        val adapter = ArrayAdapter<String>(
+//            this,
+//            android.R.layout.simple_list_item_1,list
+//        )
+//
+//        // attach the array adapter with list view
+//        listConversations?.adapter = adapter
+
+        // list view item click listener
+
+
+//        listConversations?.setOnItemClickListener { parent, _, position, _ ->
+//            val selectedItem = parent.getItemAtPosition(position) as Conversation
+//            print(selectedItem)
+//        }
+//        btnChoixConv = findViewById(R.id.btnChoixConv)
+//        btnChoixConv?.setOnClickListener(this)
         gs = application as GlobalState
         val bdl = this.intent.extras
         gs!!.alerter("hash : " + (bdl?.getString("hash") ?: ""))
@@ -89,12 +121,18 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
             ) {
                 val listeConvs = response?.body()
                 Log.i(GlobalState.CAT, listeConvs.toString())
-                spinConversations = findViewById<View?>(R.id.spinConversations) as Spinner
-                spinConversations!!.adapter = MyCustomAdapter(
+                listConversations = findViewById<View?>(R.id.listConversations) as ListView
+                listConversations!!.adapter = MyCustomAdapter(
                     this@ChoixConvActivity,
                     R.layout.spinner_item,
                     listeConvs?.getConversations()
                 )
+//                spinConversations = findViewById<View?>(R.id.spinConversations) as Spinner
+//                spinConversations!!.adapter = MyCustomAdapter(
+//                    this@ChoixConvActivity,
+//                    R.layout.spinner_item,
+//                    listeConvs?.getConversations()
+//                )
             }
 
             override fun onFailure(call: Call<ListConversations?>?, t: Throwable?) {
@@ -103,24 +141,25 @@ class ChoixConvActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    override fun onClick(view: View?) {
-        // println(view)
-        view?.let {
-            when (view.id) {
-                R.id.btnChoixConv -> {
-                    // gs!!.alerter("Btn choix cliqué")
-                    val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
-                    val bdl = Bundle()
-                    val conv: Conversation = spinConversations?.selectedItem as Conversation
-                    val convString = Gson().toJson(conv)
-                    bdl.putString("data", convString)
-                    bdl.putString("hash", this.hash)
-                    bdl.putString("pseudo", this.pseudo)
-                    versAffichageConv.putExtras(bdl)
-                    startActivity(versAffichageConv)
-                }
-                else -> println("Unknown")
-            }
-        }
-    }
+//    override fun onClick(view: View?) {
+//        // println(view)
+//        view?.let {
+//            when (view.id) {
+//                R.id.listConversations -> {
+//                    // gs!!.alerter("Btn choix cliqué")
+//                    val versAffichageConv = Intent(this@ChoixConvActivity, ConversationActivity::class.java)
+//                    val bdl = Bundle()
+////                    val conv: Conversation = spinConversations?.selectedItem as Conversation
+//                    val conv: Conversation = listConversations?.selectedItem as Conversation
+//                    val convString = Gson().toJson(conv)
+//                    bdl.putString("data", convString)
+//                    bdl.putString("hash", this.hash)
+//                    bdl.putString("pseudo", this.pseudo)
+//                    versAffichageConv.putExtras(bdl)
+//                    startActivity(versAffichageConv)
+//                }
+//                else -> println("Unknown")
+//            }
+//        }
+//    }
 }
