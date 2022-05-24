@@ -1,7 +1,7 @@
 package com.example.chat_2022_eleves
 
-import android.os.Bundle
 //import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -25,6 +25,8 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
     var messages: ListMessages? = null
     var list = ArrayList<String>()
     lateinit var conversationRecyclerView: RecyclerView
+    var skipBottomEvent = true
+    var isAtBottom = true
 //    var testPseudo = "toto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,23 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         btnEnvoiMessage = findViewById(R.id.conversation_btnOK)
 
         btnEnvoiMessage?.setOnClickListener(this)
+
+        conversationRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if (!recyclerView.canScrollVertically(1)) {
+//                    Toast.makeText(this@ConversationActivity, "Last", Toast.LENGTH_LONG).show()
+//                    if(!skipBottomEvent && !isAtBottom) {
+//                        getConvMessagesRequest()
+//                    }
+//                    else {
+//                        skipBottomEvent = false
+//                    }
+//                    isAtBottom = false
+//                }
+//            }
+        })
+
         gs = application as GlobalState
         val bdl = this.intent.extras
         val convString = bdl?.getString("data") ?: ""
@@ -79,12 +98,10 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 Log.i("get messages", res.toString())
                 if (res?.success.toBoolean()) {
                     messages = res
-//                    list.clear();
-//                    list.addAll(messagesList);
                     print(messages?.getMessages())
                     conversationRecyclerView.adapter = ConversationAdapter(messages?.getMessages(), pseudo!!)
                     conversationRecyclerView.adapter?.notifyDataSetChanged()
-                    conversationRecyclerView.smoothScrollToPosition(messages?.getMessages()!!.size)
+                    conversationRecyclerView.scrollToPosition(messages?.getMessages()!!.size-1)
                 }
             }
 
@@ -103,6 +120,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
                 response: Response<PostMessageResponse?>?
             ) {
                 val res = response?.body()
+                champTxtMessage?.text?.clear()
+
+                getConvMessagesRequest()
                 Log.i("POST MESSAGE", res.toString())
             }
             override fun onFailure(call: Call<PostMessageResponse?>?, t: Throwable?) {

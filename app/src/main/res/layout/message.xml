@@ -12,7 +12,6 @@
         android:background="@drawable/message_border"
         android:backgroundTint="@color/white"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"
         tools:ignore="RtlHardcoded">
 
         <TextView
