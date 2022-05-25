@@ -46,9 +46,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
         val bdl = this.intent.extras
         val convString = bdl?.getString("data") ?: ""
+        conv = Gson().fromJson(convString, Conversation::class.java)
         hash = bdl?.getString("hash")
         pseudo = bdl?.getString("pseudo") ?: ""
-        conv = Gson().fromJson(convString, Conversation::class.java)
 
         convTitle = findViewById(R.id.convTitle)
         convTitle?.text = conv?.getTheme()
