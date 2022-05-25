@@ -23,6 +23,7 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
 
     var gs: GlobalState? = null
     var btnEnvoiMessage: Button? = null
+    var convTitle: TextView? = null
     var champTxtMessage : EditText? = null
     var hash: String? = null
     var pseudo: String? = ""
@@ -48,6 +49,9 @@ class ConversationActivity : AppCompatActivity(), View.OnClickListener {
         hash = bdl?.getString("hash")
         pseudo = bdl?.getString("pseudo") ?: ""
         conv = Gson().fromJson(convString, Conversation::class.java)
+
+        convTitle = findViewById(R.id.convTitle)
+        convTitle?.text = conv?.getTheme()
 
         getConvMessagesRequest()
 

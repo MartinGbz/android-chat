@@ -2,6 +2,10 @@ package com.example.chat_2022_eleves
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.Color.BLACK
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +18,7 @@ import com.example.chat_2022_eleves.model.Message
 /**
  * Created by Martin Grabarz on 22/05/2022.
  */
-class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: String) : RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
+class ConversationAdapter(val items: ArrayList<Message?>?, val pseudo: String) : RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
 //    val BLACK = "#FF000000"
 //    val WHITE = "#FFFFFFFF"
 //    val RED = "#F44336"
@@ -35,16 +39,17 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
 //    @ColorInt val TRANSPARENT = 0
 
     var sp: SharedPreferences? = null
+    var shapeDrawable : Drawable? = null
 
     inner class ViewHolder(val binding: MessageBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor", "RtlHardcoded")
-        fun bindAndVersion(message: Message, testPseudo: String) {
+        fun bindAndVersion(message: Message, pseudo: String) {
             with(message) {
                 binding.messageTxt.text = message.contenu
                 binding.auteurTxt.text = message.auteur
-                println(testPseudo)
+                println(pseudo)
                 val params : FrameLayout.LayoutParams
-                if(message.auteur == testPseudo) {
+                if(message.auteur == pseudo) {
                     params = FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT
@@ -68,7 +73,10 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
 //                var a = Color.parseColor("#FF0000")
 //                var a = 0xFF000000
 //                var a = findColor(message.couleur!!)
-//                binding.bubble.setBackgroundColor(BLACK.toInt())
+//                binding.bubble.setBackgroundColor(Color.GREEN)
+                 shapeDrawable = binding.bubble.background
+                setBgColor(message.couleur!!, shapeDrawable!!)
+//                shapeDrawable?.setTint( Color.BLUE)
             }
         }
     }
@@ -81,20 +89,20 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val testPseudo: Strin
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindAndVersion(items!![position]!!, testPseudo)
+        holder.bindAndVersion(items!![position]!!, pseudo)
     }
 
-//    private fun findColor(color : String): Int {
-//        return when (color) {
-//            "black" -> Color.parseColor(BLACK)
-//            "white" -> Color.parseColor(WHITE)
-//            "red" -> Color.parseColor(RED)
-//            "green" -> Color.parseColor(GREEN)
-//            "blue" -> Color.parseColor(BLUE)
-//            // 'else' is not required because all cases are covered
-//            else -> Color.parseColor(WHITE)
-//        }
-//    }
+    private fun setBgColor(color : String, shapeDrawable : Drawable) {
+        when (color) {
+            "black" -> shapeDrawable.setTint(Color.GRAY)
+            "white" -> shapeDrawable.setTint(Color.WHITE)
+            "red" -> shapeDrawable.setTint(Color.RED)
+            "green" -> shapeDrawable.setTint(Color.GREEN)
+            "blue" -> shapeDrawable.setTint(Color.BLUE)
+            // 'else' is not required because all cases are covered
+            else -> shapeDrawable.setTint(Color.WHITE)
+        }
+    }
 
 }
 

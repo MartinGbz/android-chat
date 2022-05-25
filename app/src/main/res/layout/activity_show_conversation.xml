@@ -9,7 +9,7 @@
     tools:context=".ConversationActivity" >
 
     <TextView
-        android:id="@+id/conversation_titre"
+        android:id="@+id/convTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/conversation_btnOK"
@@ -49,8 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/conversation_btnOK"
-        android:layout_below="@+id/conversation_titre"
-        android:layout_alignStart="@+id/conversation_titre"
+        android:layout_below="@+id/convTitle"
+        android:layout_alignStart="@+id/convTitle"
         android:layout_alignParentEnd="true"
         tools:context=".ConversationActivity"
         android:paddingStart="10dp"

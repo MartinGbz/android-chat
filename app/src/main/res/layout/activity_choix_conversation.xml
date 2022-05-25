@@ -7,6 +7,14 @@
     android:background="@color/white"
     tools:context=".ChoixConvActivity">
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:text="Button"
+        tools:ignore="MissingConstraints,RtlHardcoded" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
