@@ -33,8 +33,6 @@ class ChoixConvActivity : AppCompatActivity() {
     ) : ArrayAdapter<Conversation?>(context!!, layoutId, dataConvs!!) {
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
-            // return getCustomView(position, convertView, parent);
-            // getLayoutInflater() vient de Android.Activity => il faut utiliser une classe interne
             val inflater = layoutInflater
             val item = inflater.inflate(layoutId, parent, false)
             val nextC = dataConvs?.get(position)
@@ -52,7 +50,6 @@ class ChoixConvActivity : AppCompatActivity() {
 
         @SuppressLint("ViewHolder")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            // return getCustomView(position, convertView, parent);
             val inflater = layoutInflater
             val item = inflater.inflate(layoutId, parent, false)
             val nextC = dataConvs?.get(position)

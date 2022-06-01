@@ -49,15 +49,8 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val pseudo: String) :
                     }
                 }
                 binding.bubble.layoutParams = params
-//                binding.bubble.gravity = Gravity.RIGHT
-
-//                var a = Color.parseColor("#FF0000")
-//                var a = 0xFF000000
-//                var a = findColor(message.couleur!!)
-//                binding.bubble.setBackgroundColor(Color.GREEN)
-                 shapeDrawable = binding.bubble.background
+                shapeDrawable = binding.bubble.background
                 setBgColor(message.couleur!!, shapeDrawable!!)
-//                shapeDrawable?.setTint( Color.BLUE)
             }
         }
     }
@@ -80,7 +73,6 @@ class ConversationAdapter(val items: ArrayList<Message?>?, val pseudo: String) :
             "red" -> shapeDrawable.setTint(Color.RED)
             "green" -> shapeDrawable.setTint(Color.GREEN)
             "blue" -> shapeDrawable.setTint(Color.BLUE)
-            // 'else' is not required because all cases are covered
             else -> shapeDrawable.setTint(Color.WHITE)
         }
     }
